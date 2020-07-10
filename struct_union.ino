@@ -45,7 +45,7 @@ typedef union btPacket_t{
  byte byteArray[union_size]; /* you can use other variable types if you want. Like: a 32bit integer if you have 4 8bit variables in your struct */
 };
 
-//now we define it
+//create a variable using this new union we defined
 btPacket_t settings;  
 
 void setup()
