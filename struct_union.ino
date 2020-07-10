@@ -28,7 +28,7 @@ typedef struct settings_t{
 
 //the packet size will be the number of bytes (1byte = 8bits) of all the variables we defined in the structure above
 //in our case it's: 4 bytes (the first 4 variables in the struct) + 2 bytes (the uint16_t is 2*8 bytes) + 4bytes (the float) + 1 byte (the last variable)
-#define PACKET_SIZE 11 
+const int union_size = sizeof(settings_t);
 //NOTE: the actual sizes of the variables MIGHT differ based on your platform, so be very careful when using this
 //for cross-platform code (having it run the same on an ESP32 and an Arduino Nano for example)
 
@@ -40,7 +40,7 @@ typedef struct settings_t{
  */
 typedef union btPacket_t{
  settings_t structure;
- byte byteArray[sizeof(sensorData_t)]; /* you can use other variable types if you want. Like: a 32bit integer if you have 4 8bit variables in your struct */
+ byte byteArray[union_size]; /* you can use other variable types if you want. Like: a 32bit integer if you have 4 8bit variables in your struct */
 };
 
 //now we define it
@@ -63,13 +63,13 @@ void loop()
   settings.structure.sensortype = 0; 
   settings.structure.isWet = 0; 
   settings.structure.temp = 75; 
-  settings.structure.volts = 3141 / 1000.0; 
+  settings.structure.volts = 412.12; 
   settings.structure.signal = 88;
   
   //let's see what we stored in it
   //this time we're treating it as a byte array
   //instead of printing it to serial you could send the whole thing over Bluetooth instead for example
-  for(int i=0; i<PACKET_SIZE; i++)
+  for(int i=0; i < union_size; i++)
   {
     Serial.print(settings.byteArray[i]);
     Serial.print("\t");
