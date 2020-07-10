@@ -1,4 +1,6 @@
-/* This simple (ish) sketch shows you how to organize your data into a struct
+/* Arduino data manipulation and concatenation with structures and unions
+ * 
+ * This simple (ish) sketch shows you how to organize your data into a struct
  * and then access the whole thing as a byte array.
  *
  * Useful if you want to concatenate several variables into a single byte array
